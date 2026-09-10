@@ -11,8 +11,8 @@ import {
 import { PokmeonsService } from './pokmeons.service';
 import { CreatePokmeonDto } from './dto/create-pokmeon.dto';
 import { UpdatePokmeonDto } from './dto/update-pokmeon.dto';
+import { PaginationDto } from '../shared';
 
-import { PaginationDto } from 'src/shared';
 @Controller('pokmeons')
 export class PokmeonsController {
   constructor(private readonly pokmeonsService: PokmeonsService) {}
