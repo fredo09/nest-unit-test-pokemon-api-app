@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePokmeonDto } from './dto/create-pokmeon.dto';
 import { UpdatePokmeonDto } from './dto/update-pokmeon.dto';
 import { PaginationDto } from 'src/shared';
@@ -18,7 +18,7 @@ export class PokmeonsService {
    * @returns a string that indicates that the pokemon was added
    */
   create(createPokmeonDto: CreatePokmeonDto) {
-    return 'This action adds a new pokmeon';
+    return `This action adds a new pokmeon ${createPokmeonDto.name}`;
   }
 
   /**
@@ -40,7 +40,7 @@ export class PokmeonsService {
     const pokemonDetailsPromises = data.results.map((result) => {
       const url = result.url;
       const id = url.split('/').at(-2)!;
-      return this.getPokemonInformation(+id);
+      return this._getPokemonInformation(+id);
     });
 
     const pokemons = await Promise.all(pokemonDetailsPromises);
@@ -57,7 +57,7 @@ export class PokmeonsService {
    * @returns the pokemon information
    */
   findOne(id: number) {
-    return `This action returns a #${id} pokmeon`;
+    return this._getPokemonInformation(id);
   }
 
   /**
@@ -84,8 +84,13 @@ export class PokmeonsService {
    * @param id the pokemon id
    * @returns the pokemon information
    */
-  private async getPokemonInformation(id: number): Promise<Pokemon> {
+  private async _getPokemonInformation(id: number): Promise<Pokemon> {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+    if (response.status === 404) {
+      throw new NotFoundException(`Pokemon with id ${id} not found`);
+    }
+
     const pokemonData = (await response.json()) as PokeApiPokemonResponsen;
 
     return {
