@@ -18,7 +18,9 @@ export class PokmeonsService {
    * @returns a string that indicates that the pokemon was added
    */
   create(createPokmeonDto: CreatePokmeonDto) {
-    return `This action adds a new pokmeon ${createPokmeonDto.name}`;
+    return Promise.resolve(
+      `This action adds a new pokmeon ${createPokmeonDto.name}`,
+    );
   }
 
   /**
@@ -67,7 +69,7 @@ export class PokmeonsService {
    * @returns a string that indicates that the pokemon was updated
    */
   update(id: number, updatePokmeonDto: UpdatePokmeonDto) {
-    return `This action updates a #${id} pokmeon`;
+    return Promise.resolve(`This action updates a #${id} pokmeon`);
   }
 
   /**
@@ -76,7 +78,7 @@ export class PokmeonsService {
    * @returns a string that indicates that the pokemon was removed
    */
   remove(id: number) {
-    return `This action removes a #${id} pokmeon`;
+    return Promise.resolve(`This action removes a #${id} pokmeon`);
   }
 
   /**

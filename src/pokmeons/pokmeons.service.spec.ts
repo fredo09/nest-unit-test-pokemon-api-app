@@ -18,10 +18,10 @@ describe('PokmeonsService', () => {
   });
 
   describe('Validate methods of PokemonsService', () => {
-    it('Should create a new pokemon', () => {
+    it('Should create a new pokemon', async () => {
       const mockPokemon = { name: 'Pikachu', type: 'Electric' };
 
-      const result = service.create(mockPokemon);
+      const result = await service.create(mockPokemon);
 
       expect(result).toBe('This action adds a new pokmeon Pikachu');
     });
@@ -286,7 +286,6 @@ describe('PokmeonsService', () => {
     it('Should check properties of list pokemons', async () => {
       const idPokemon = 4;
       const pokemon = await service.findOne(idPokemon);
-      console.log(pokemon);
 
       // expect(pokemon).toHaveProperty('name');
       expect(pokemon).toEqual(
