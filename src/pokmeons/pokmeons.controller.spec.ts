@@ -107,7 +107,7 @@ describe('PokmeonsController', () => {
         Promise.resolve('This action updates a 1 pokemon'),
       );
 
-    const pokmeons = await controller.update(pokemonId, mockPokemonById);
+    const pokmeons = await controller.update(pokemonId, mockPokemonUpdated);
     expect(pokmeons).toBe('This action updates a 1 pokemon');
   });
   it('Should have called the service with the correct id (delete)', async () => {

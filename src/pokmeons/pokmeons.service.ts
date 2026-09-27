@@ -68,6 +68,7 @@ export class PokmeonsService {
    * @param updatePokmeonDto the data to update the pokemon
    * @returns a string that indicates that the pokemon was updated
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(id: number, updatePokmeonDto: UpdatePokmeonDto) {
     return Promise.resolve(`This action updates a #${id} pokmeon`);
   }
